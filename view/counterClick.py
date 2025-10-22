@@ -10,6 +10,7 @@ class MainScreen(QMainWindow):
         super().__init__(**kwargs)
 
         self.__number = 0
+        # Load the .ui file
 
         loadUi('view/pythonInterface.ui', self)
         self.show()
