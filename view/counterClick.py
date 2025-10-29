@@ -1,8 +1,12 @@
 import test
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import pyqtSlot
+from notifypy import Notify
 import datetime as dt
+
+from controller.authController import AuthController as ac
+
 import os
 
 class MainScreen(QMainWindow):
@@ -33,7 +37,44 @@ class MainScreen(QMainWindow):
         os._exit(0)
     
     def getText(self):
-        text = self.textBox.text()
+
+        login = self.textBox.text()
         keyPass = self.keypassBox.text()
-        print(f"Login: {text}")
-        print(f"Password: {keyPass}")
+
+        authLogin = ac()
+        authLogin.authenticate(login, keyPass)
+
+        if authLogin:
+            self.Notify("Login", "Login made!")
+        else:
+            self.Notify("Login", "Login error!")
+
+    def Notify(self, title, msg):
+        notification = Notify()
+        notification.title = title
+        notification.message = msg
+        notification.send()
+
+
+
+
+        # print(f"Login: {login}")
+        # print(f"Password: {keyPass}")
+
+        #         # Debug: show raw values and strip whitespace
+        # login = self.textBox.text().strip()
+        # keyPass = self.keypassBox.text().strip()
+        # print("DEBUG: login repr:", repr(login))
+        # print("DEBUG: keyPass repr:", repr(keyPass))
+
+        # # Validate before calling authenticate
+        # if not login:
+        #     QMessageBox.warning(self, "Missing input", "Login is missing.")
+        #     return
+        # if not keyPass:
+        #     QMessageBox.warning(self, "Missing input", "Password is missing.")
+        #     return
+
+        # # Call authenticate and optionally print result (depends on your controller)
+        # result = ac.authenticate(login, keyPass)
+        # print("authenticate returned:", repr(result))
