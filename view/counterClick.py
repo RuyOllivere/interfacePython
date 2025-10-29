@@ -1,5 +1,5 @@
 import test
-from PyQt5.QtWidgets import QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QDialog, QMainWindow, QMessageBox
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import pyqtSlot
 from notifypy import Notify
@@ -9,14 +9,14 @@ from controller.authController import AuthController as ac
 
 import os
 
-class MainScreen(QMainWindow):
+class MainScreen(QDialog):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         self.__number = 0
         # Load the .ui file
 
-        loadUi('view/pythonInterface.ui', self)
+        loadUi('view/loginPage.ui', self)
         self.show()
         # self.btnClick.clicked.connect(self.showInfo)
         self.btnExit.clicked.connect(self.finishProgram)
