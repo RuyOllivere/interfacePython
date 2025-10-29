@@ -2,7 +2,7 @@
 # import view.counterClick as cc
 
 loginDb = 'user'
-passwordDb = 'password'
+passwordDb = 'user'
 
 
 class AuthController:
@@ -10,9 +10,9 @@ class AuthController:
     def authenticate(self, login, password):
         try:
             if(login == loginDb and password == passwordDb):
-                return print("Authentication made!")
+                return True
             else:
-                return print("Wrong login or password, a**hole!")
+                return False
 
         except Exception as e:
             print(f"Error: {e}")

@@ -9,7 +9,8 @@ from controller.authController import AuthController as ac
 
 import os
 
-class MainScreen(QDialog):
+class LoginUi(QDialog):
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -42,12 +43,11 @@ class MainScreen(QDialog):
         keyPass = self.keypassBox.text()
 
         authLogin = ac()
-        ans = authLogin.authenticate(login, keyPass)
+        result = authLogin.authenticate(login, keyPass)
 
-        if ans:
+        if result is True:
             self.Notify("Login", "Login made!")
-            self.close()
-            self.finishProgram()
+            self.accept()
         else:
             self.Notify("Login", "Login error!")
 
