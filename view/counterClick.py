@@ -42,9 +42,9 @@ class MainScreen(QMainWindow):
         keyPass = self.keypassBox.text()
 
         authLogin = ac()
-        authLogin.authenticate(login, keyPass)
+        ans = authLogin.authenticate(login, keyPass)
 
-        if authLogin:
+        if ans:
             self.Notify("Login", "Login made!")
         else:
             self.Notify("Login", "Login error!")
@@ -52,29 +52,6 @@ class MainScreen(QMainWindow):
     def Notify(self, title, msg):
         notification = Notify()
         notification.title = title
+        notification.icon = "./template/dog.jpg"
         notification.message = msg
         notification.send()
-
-
-
-
-        # print(f"Login: {login}")
-        # print(f"Password: {keyPass}")
-
-        #         # Debug: show raw values and strip whitespace
-        # login = self.textBox.text().strip()
-        # keyPass = self.keypassBox.text().strip()
-        # print("DEBUG: login repr:", repr(login))
-        # print("DEBUG: keyPass repr:", repr(keyPass))
-
-        # # Validate before calling authenticate
-        # if not login:
-        #     QMessageBox.warning(self, "Missing input", "Login is missing.")
-        #     return
-        # if not keyPass:
-        #     QMessageBox.warning(self, "Missing input", "Password is missing.")
-        #     return
-
-        # # Call authenticate and optionally print result (depends on your controller)
-        # result = ac.authenticate(login, keyPass)
-        # print("authenticate returned:", repr(result))
